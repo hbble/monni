@@ -118,14 +118,14 @@
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item nav-expense" data-toggle="tooltip" data-placement="right" title="Add new Expense">
-          <a class="nav-link" href="#">
+        <li class="nav-item nav-spec nav-expense" data-toggle="tooltip" data-placement="right" title="Add new Expense">
+          <a class="nav-link" href="/newexp">
             <i class="fa fa-fw fa-minus" style="font-size: 2em"></i>
             <span class="nav-link-text">Expense</span>
           </a>
         </li>
-        <li class="nav-item nav-income" data-toggle="tooltip" data-placement="right" title="Add new Income">
-          <a class="nav-link" href="#">
+        <li class="nav-item nav-spec nav-income" data-toggle="tooltip" data-placement="right" title="Add new Income">
+          <a class="nav-link" href="/newinc">
             <i class="fa fa-fw fa-plus" style="font-size: 2em"></i>
             <span class="nav-link-text">Income</span>
           </a>
@@ -218,7 +218,7 @@
           <form class="form-inline my-2 my-lg-0 mr-lg-2">
             <div class="input-group">
               <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-btn">
+              <span class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fa fa-search"></i>
                 </button>
@@ -235,19 +235,7 @@
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="/">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Blank Page</li>
-      </ol>
-      <div class="row">
-        <div class="col-12">
-          <h1>Blank</h1>
-          <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
-        </div>
-      </div>
+      {% block container %}{% endblock %}
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

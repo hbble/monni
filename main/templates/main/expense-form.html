@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+
+{% block container %}
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Expense Form</li>
+  </ol>
+  <div class="row">
+    <div class="col-12">
+      <form>
+        <div class="form-group md-2">
+          <div class="form-row">
+            <div class="col-md-8">
+              <label for="exampleFormControlSelect1">Category</label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option>Choose..</option>
+                <option>Food</option>
+                <option>Not Food</option>
+                <option>Entertaining</option>
+                <option>Etc</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="inputAmount" >Amount</label>
+              <div class="input-group ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">₴</div>
+                </div>
+                <input class="form-control" id="inputAmount" type="number" aria-describedby="nameHelp" placeholder="Enter amount">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn btn-primary btn-block" href="#">Submit</a>
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

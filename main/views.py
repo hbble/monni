@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-	return render(request, 'main/base.html')
+	return render(request, 'main/index.html')
 
 def AddIncome(request):
-	pass
+	return render(request, 'main/income-form.html')
 
 def AddExpense(request):
-	pass
+	return render(request, 'main/expense-form.html')
