@@ -14,8 +14,8 @@
         <div class="form-group md-2">
           <div class="form-row">
             <div class="col-md-8">
-              <label for="exampleFormControlSelect1">Category</label>
-              <select class="form-control" id="exampleFormControlSelect1">
+              <label for="expCategorySelect">Category</label>
+              <select class="form-control" id="expCategorySelect">
                 <option>Choose..</option>
                 <option>Food</option>
                 <option>Not Food</option>
@@ -29,13 +29,13 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">₴</div>
                 </div>
-                <input class="form-control" id="inputAmount" type="number" aria-describedby="nameHelp" placeholder="Enter amount">
+                <input class="form-control" id="inputAmount" type="number" min="0" aria-describedby="nameHelp" placeholder="Enter amount">
               </div>
             </div>
           </div>
         </div>
 
-        <a class="btn btn-primary btn-block" href="#">Submit</a>
+        <input class="btn btn-danger btn-block" type="submit" value="Submit">
       </form>
 
     </div>

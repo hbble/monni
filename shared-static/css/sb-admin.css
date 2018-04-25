@@ -70,7 +70,7 @@ body.fixed-nav {
   max-height: 75vh;
 }
 
-#mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
+#mainNav .navbar-collapse .navbar-nav .nav-item {
   cursor: pointer;
 }
 
@@ -155,6 +155,8 @@ body.fixed-nav {
     position: absolute;
     top: 0;
     left: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
@@ -204,7 +206,7 @@ body.fixed-nav {
 
 @media (min-width: 992px) {
   #mainNav.fixed-top .navbar-sidenav {
-    height: calc(100vh - 112px);
+    height: calc(100vh - 224px);
   }
   #mainNav.fixed-top .sidenav-toggler {
     position: absolute;
@@ -214,7 +216,7 @@ body.fixed-nav {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: calc(100vh - 176px);
+    margin-top: calc(100vh - 168px);
   }
   #mainNav.fixed-top .sidenav-toggler > .nav-item {
     width: 250px;
@@ -233,51 +235,33 @@ body.fixed-nav {
   background-color: #212529;
 }
 
-#mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
-  color: #adb5bd;
+#mainNav.fixed-top.navbar-dark .sidenav-toggler .nav-spec a i {
+  font-size: 1.5em;
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler .nav-expense {
-  background-color: #ff6f658a; 
+  background-color: #dc3546dc; 
   
 }
 #mainNav.fixed-top.navbar-dark .sidenav-toggler .nav-expense a i {
-  color: #ff9b94c2;
+  color: #ff7482;
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler .nav-income {
-  background-color: #72ff477c;
+  background-color: #28a746ce;
 }
 #mainNav.fixed-top.navbar-dark .sidenav-toggler .nav-income a i {
   color: #b7ffa1bb;
 }
 
-#mainNav.fixed-top.navbar-light .sidenav-toggler {
-  background-color: #dee2e6;
+.navbar-dark .navbar-nav .nav-spec .nav-link  {
+  color: rgba(255, 255, 255, 0.75);
 }
 
-#mainNav.fixed-top.navbar-light .sidenav-toggler a i {
-  color: rgba(0, 0, 0, 0.5);
+.navbar-dark .navbar-nav .nav-spec .nav-link:hover  {
+  color: rgba(255, 255, 255);
 }
 
-body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler {
-  overflow-x: hidden;
-  width: 55px;
-}
-
-body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler .nav-item,
-body.sidenav-toggled #mainNav.fixed-top .sidenav-toggler .nav-link {
-  width: 55px !important;
-}
-
-body.sidenav-toggled #mainNav.fixed-top #sidenavToggler i {
-  -webkit-transform: scaleX(-1);
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  transform: scaleX(-1);
-  filter: FlipH;
-  -ms-filter: 'FlipH';
-}
 
 #mainNav.static-top .sidenav-toggler {
   display: none;
@@ -289,15 +273,6 @@ body.sidenav-toggled #mainNav.fixed-top #sidenavToggler i {
   }
 }
 
-body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
-  -webkit-transform: scaleX(-1);
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  transform: scaleX(-1);
-  filter: FlipH;
-  -ms-filter: 'FlipH';
-}
-
 .content-wrapper {
   overflow-x: hidden;
   background: white;
@@ -307,46 +282,6 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
   .content-wrapper {
     margin-left: 250px;
   }
-}
-
-#sidenavToggler i {
-  font-weight: 800;
-}
-
-.navbar-sidenav-tooltip.show {
-  display: none;
-}
-
-@media (min-width: 992px) {
-  body.sidenav-toggled .content-wrapper {
-    margin-left: 55px;
-  }
-}
-
-body.sidenav-toggled .navbar-sidenav {
-  width: 55px;
-}
-
-body.sidenav-toggled .navbar-sidenav .nav-link-text {
-  display: none;
-}
-
-body.sidenav-toggled .navbar-sidenav .nav-item,
-body.sidenav-toggled .navbar-sidenav .nav-link {
-  width: 55px !important;
-}
-
-body.sidenav-toggled .navbar-sidenav .nav-item:after,
-body.sidenav-toggled .navbar-sidenav .nav-link:after {
-  display: none;
-}
-
-body.sidenav-toggled .navbar-sidenav .nav-item {
-  white-space: nowrap;
-}
-
-body.sidenav-toggled .navbar-sidenav-tooltip.show {
-  display: flex;
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
@@ -390,50 +325,6 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
     background: #343a40;
-  }
-}
-
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:hover {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a,
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:focus, #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:hover,
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a:focus,
-#mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a:hover {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-#mainNav.navbar-light .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-@media (min-width: 992px) {
-  #mainNav.navbar-light .navbar-collapse .navbar-sidenav {
-    background: #f8f9fa;
-  }
-  #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a {
-    color: #000 !important;
-    background-color: #e9ecef;
-  }
-  #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a:hover {
-    color: #000;
-  }
-  #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
-  #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
-    background: #f8f9fa;
   }
 }
 
@@ -487,11 +378,5 @@ footer.sticky-footer {
 @media (min-width: 992px) {
   footer.sticky-footer {
     width: calc(100% - 250px);
-  }
-}
-
-@media (min-width: 992px) {
-  body.sidenav-toggled footer.sticky-footer {
-    width: calc(100% - 55px);
   }
 }

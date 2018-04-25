@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import InCategory, OutCategory
 
-# Register your models here.
+admin.site.register(InCategory)
+admin.site.register(OutCategory)
+
