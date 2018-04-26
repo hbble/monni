@@ -8,12 +8,18 @@ class InCategory(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Income Categories'
+
 class OutCategory(models.Model):
     name = models.CharField(max_length=40, unique=True)
     color = models.CharField(max_length=6, unique=True, default='ff8888')
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Expense Categories'
 
 class Incomes(models.Model):
     category = models.ForeignKey(InCategory, on_delete=models.CASCADE)

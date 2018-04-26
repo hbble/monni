@@ -262,17 +262,6 @@ body.fixed-nav {
   color: rgba(255, 255, 255);
 }
 
-
-#mainNav.static-top .sidenav-toggler {
-  display: none;
-}
-
-@media (min-width: 992px) {
-  #mainNav.static-top .sidenav-toggler {
-    display: flex;
-  }
-}
-
 .content-wrapper {
   overflow-x: hidden;
   background: white;

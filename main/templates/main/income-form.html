@@ -10,16 +10,17 @@
   </ol>
   <div class="row">
     <div class="col-12">
-      <form>
-        <div class="form-group">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group md-2">
           <div class="form-row">
             <div class="col-md-8">
               <label for="inCategorySelect">Category</label>
-              <select class="form-control" id="inCategorySelect">
-                <option>Choose..</option>
-                <option>Salary</option>
-                <option>Gift</option>
-                <option>Etc</option>
+              <select class="form-control" id="inCategorySelect" required>
+                <option disabled selected value style="display:none">Select Category</option>
+                {% for category in cat_list %}
+                  <option>{{ category.name }}</option>
+                {% endfor %}
               </select>
             </div>
             <div class="col-md-4">
@@ -28,7 +29,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">₴</div>
                 </div>
-                <input class="form-control" id="inputAmount" type="number" min="0" aria-describedby="nameHelp" placeholder="Enter amount">
+                <input class="form-control" id="inputAmount" type="number" min="0" required placeholder="Enter amount">
               </div>
             </div>
           </div>

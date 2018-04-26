@@ -21,14 +21,14 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="/">Monni</a>
+    <a class="navbar-brand" href="{% url 'main:index' %}">Monni</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="mainAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example">
-          <a class="nav-link" href="/">
+          <a class="nav-link" href="{% url 'main:index' %}">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -119,13 +119,13 @@
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item nav-spec nav-expense" data-toggle="tooltip" data-placement="right" title="Add new Expense">
-          <a class="nav-link text-center" href="/newexp">
+          <a class="nav-link text-center" href="{% url 'main:AddExpense' %}">
             <i class="fa fa-fw fa-minus"></i>
             <span class="nav-link-text">Expense</span>
           </a>
         </li>
         <li class="nav-item nav-spec nav-income" data-toggle="tooltip" data-placement="right" title="Add new Income">
-          <a class="nav-link text-center" href="/newinc">
+          <a class="nav-link text-center" href="{% url 'main:AddIncome' %}">
             <i class="fa fa-fw fa-plus"></i>
             <span class="nav-link-text">Income</span>
           </a>
