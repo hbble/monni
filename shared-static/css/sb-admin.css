@@ -147,6 +147,7 @@ body.fixed-nav {
   #mainNav .navbar-brand {
     width: 250px;
   }
+
   #mainNav .navbar-collapse {
     overflow: visible;
     max-height: none;
