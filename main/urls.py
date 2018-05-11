@@ -7,5 +7,6 @@ urlpatterns = [
 	path('', views.index, name='index'),
 	path('newinc/', views.AddIncomeView, name='AddIncome'),
 	path('newexp/', views.AddExpenseView, name='AddExpense'),
-	path('newexp/', views.postExp, name='submitExp'),
+	path('newexp/submit', views.PostExpense, name='submitExp'),
+	path('newinc/submit', views.PostIncome, name='submitInc'),
 ]

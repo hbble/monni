@@ -8,35 +8,88 @@
     </li>
     <li class="breadcrumb-item active">Income Form</li>
   </ol>
+
   <div class="row">
     <div class="col-12">
-      <form action="" method="post">
-        {% csrf_token %}
-        <div class="form-group md-2">
-          <div class="form-row">
-            <div class="col-md-8">
-              <label for="inCategorySelect">Category</label>
-              <select class="form-control" id="inCategorySelect" required>
-                <option disabled selected value style="display:none">Select Category</option>
-                {% for category in cat_list %}
-                  <option>{{ category.name }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="inputAmount" >Amount</label>
-              <div class="input-group ">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">₴</div>
+      <!-- {# Card new #} -->
+      <div class="card bg-light border border-success mb-3">
+        <div class="card-header">Add new Income:</div>
+        <div class="card-body ">
+          {% if error_message %}
+          <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+          </div>
+          {% endif %}
+          <form action="{% url 'main:submitInc' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group mb-1">
+              <div class="form-row align-items-end">
+                <div class="col-md-7">
+                  <label for="inCategorySelect">Category</label>
+                  <select class="form-control" id="inCategorySelect" name="category" required>
+                    <option disabled selected value style="display:none">Select Category</option>
+                    {% for category in cat_list %}
+                      <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                  </select>
                 </div>
-                <input class="form-control" id="inputAmount" type="number" min="0" required placeholder="Enter amount">
+                <div class="col-md-3">
+                  <label for="inputAmount" >Amount</label>
+                  <div class="input-group ">
+                    <input class="form-control input-amount" id="inputAmount"
+                      name="amount" type="number" min="0" required placeholder="Enter amount">
+                    <div class="input-group-append">
+                        <div class="input-group-text">₴</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                    <input class="btn btn-dark btn-block" type="submit" value="Submit">
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-
-        <input class="btn btn-success btn-block" type="submit" value="Submit">
-      </form>
+      </div>
+      <!-- {# Card latest #} -->
+      <div class="card bg-light mb-3">
+        <div class="card-header">Latest Incomes:</div>
+        <div class="card-body">
+          {% if latest_inc_list %}
+            {% for income in latest_inc_list %}
+              <!-- {# Form cycle #} -->
+              <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <div class="form-row align-items-end">
+                    <div class="col-md-7">
+                      <select class="form-control form-control-sm" name="category" required disabled>
+                        <option value="{{ income.category.id }}">{{ income.category.name }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="input-group input-group-sm">
+                        <input class="form-control input-amount" name="amount" disabled type="number"
+                          min="0" value="{{ income.amount }}" required placeholder="Enter amount">
+                        <div class="input-group-append">
+                          <div class="input-group-text">₴</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <input class="btn btn-sm btn-dark btn-block" disabled type="submit" value="Edit">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            {% endfor %}
+            <a class="btn btn-secondary btn-block" href="#" role"button">More..</a>
+          {% else %}
+              There is no latest incomes yet. You can add one using form above.
+          {% endif %}
+        </div>
+      </div>
+      
     </div>
   </div>
 {% endblock %}

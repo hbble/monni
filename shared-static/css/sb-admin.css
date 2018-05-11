@@ -318,6 +318,10 @@ body.fixed-nav {
   }
 }
 
+.input-amount {
+  text-align: right;
+}
+
 .card-body-icon {
   position: absolute;
   z-index: 0;
