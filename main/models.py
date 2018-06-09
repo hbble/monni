@@ -9,7 +9,7 @@ class InCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Income Categories'
+        verbose_name = 'Income Categorie'
 
 class OutCategory(models.Model):
     name = models.CharField(max_length=40, unique=True)
@@ -19,9 +19,9 @@ class OutCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Expense Categories'
+        verbose_name = 'Expense Categorie'
 
-class Incomes(models.Model):
+class Income(models.Model):
     category = models.ForeignKey(InCategory, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.PositiveIntegerField()
@@ -30,7 +30,7 @@ class Incomes(models.Model):
     def __str__(self):
         return '[{}] {} +{}₴'.format(self.user, self.category, self.amount)
 
-class Expenses(models.Model):
+class Expense(models.Model):
     category = models.ForeignKey(OutCategory, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.PositiveIntegerField()

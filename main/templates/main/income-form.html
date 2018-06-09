@@ -27,7 +27,7 @@
                 <div class="col-md-7">
                   <label for="inCategorySelect">Category</label>
                   <select class="form-control" id="inCategorySelect" name="category" required>
-                    <option disabled selected value style="display:none">Select Category</option>
+                    <option disabled selected style="display:none">Select Category</option>
                     {% for category in cat_list %}
                       <option value="{{ category.id }}">{{ category.name }}</option>
                     {% endfor %}
@@ -58,18 +58,21 @@
           {% if latest_inc_list %}
             {% for income in latest_inc_list %}
               <!-- {# Form cycle #} -->
-              <form action="" method="post">
+              <form action="{% url 'main:editIncome' income.id %}" method="post">
                 {% csrf_token %}
                 <div class="form-group mb-3">
                   <div class="form-row align-items-end">
                     <div class="col-md-7">
-                      <select class="form-control form-control-sm" name="category" required disabled>
-                        <option value="{{ income.category.id }}">{{ income.category.name }}</option>
+                      <select class="form-control form-control-sm" id="edit-cat-{{ income.id }}" name="category" required disabled>
+                        {% for category in cat_list %}
+                          <option {% if category.id == income.category.id %}selected{% endif %}
+                            value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
                       </select>
                     </div>
                     <div class="col-md-3">
                       <div class="input-group input-group-sm">
-                        <input class="form-control input-amount" name="amount" disabled type="number"
+                        <input class="form-control input-amount" id="edit-amount-{{ income.id }}" name="amount" disabled type="number"
                           min="0" value="{{ income.amount }}" required placeholder="Enter amount">
                         <div class="input-group-append">
                           <div class="input-group-text">₴</div>
@@ -77,19 +80,40 @@
                       </div>
                     </div>
                     <div class="col-md-2">
-                      <input class="btn btn-sm btn-dark btn-block" disabled type="submit" value="Edit">
+                      <div class="btn-group btn-group-sm d-flex" role="group" aria-label="Edit Group">
+                        <button class="btn btn-dark w-75" type="button" id="btn-enable-form-{{ income.id }}" onclick="makeEditable('{{ income.id }}')">Edit</button>
+                        <button class="btn btn-danger w-25" type="button" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </form>
             {% endfor %}
-            <a class="btn btn-secondary btn-block" href="#" role"button">More..</a>
+            <a class="btn btn-secondary btn-block" href="{% url 'main:allOperations' %}" role"button">More..</a>
           {% else %}
               There is no latest incomes yet. You can add one using form above.
           {% endif %}
         </div>
       </div>
       
+    </div>
+  </div>
+  <!-- Delete Modal-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirm</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Delete" below if you really want to delete selected item.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger" href="#">Delete</a>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

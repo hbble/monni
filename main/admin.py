@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import InCategory, OutCategory, Incomes, Expenses
+from .models import InCategory, OutCategory, Income, Expense
 
 admin.site.register(InCategory)
 admin.site.register(OutCategory)
 
 #temp
-admin.site.register(Incomes)
-admin.site.register(Expenses)
+admin.site.register(Income)
+admin.site.register(Expense)
 

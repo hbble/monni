@@ -1,0 +1,114 @@
+{% extends "main/base.html" %}
+
+{% block custom-head-links %}
+{% load static %}
+<!-- Page level plugin CSS-->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">All Operations</li>
+  </ol>
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Latest Expenses Table</div>
+        <div class="card-body pl-0 pr-0">
+          <div class="table-responsive">
+            {% if latest_exp_list %}
+              <table class="table table-bordered table-striped" id="expTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {% for exp in latest_exp_list%}
+                    <tr>
+                      <td>{{exp.id}}</td>
+                      <td>{{exp.category}}</td>
+                      <td class="amount-cell bg-danger text-light">-{{exp.amount}}₴</td>
+                      <td>{{exp.date}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>There is no latest expenses yet.</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Footer</div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <!-- DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Latest Incomes Table</div>
+        <div class="card-body pl-0 pr-0">
+          <div class="table-responsive">
+            {% if latest_inc_list %}
+              <table class="table table-bordered table-striped" id="incTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {% for inc in latest_inc_list%}
+                    <tr>
+                      <td>{{inc.id}}</td>
+                      <td>{{inc.category}}</td>
+                      <td class="amount-cell bg-success text-light">+{{inc.amount}}₴</td>
+                      <td>{{inc.date}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+              <p>There is no latest incomes yet.</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Footer</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block custom-scripts %}
+<!-- Page level plugin JavaScript-->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<!-- Custom scripts for this page-->
+<script src="{% static 'js/sb-admin-datatables.min.js' %}"></script>
+<script src="{% static 'js/sb-admin-charts.min.js' %}"></script>
+{% endblock %}

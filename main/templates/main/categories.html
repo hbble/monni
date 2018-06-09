@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% block custom-head-links %}
+{% load static %}
+<!-- Page level plugin CSS-->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block container %}
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active">Categories</li>
+  </ol>
+  
+{% endblock %}
+
+{% block custom-scripts %}
+<!-- Page level plugin JavaScript-->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+<!-- Custom scripts for this page-->
+<script src="{% static 'js/sb-admin-datatables.min.js' %}"></script>
+<script src="{% static 'js/sb-admin-charts.min.js' %}"></script>
+{% endblock %}

@@ -16,8 +16,10 @@
   <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin.css'%}" rel="stylesheet">
+  {% block custom-head-links %}{% endblock %}
   <!-- Favicon -->
   <link rel="shortcut icon" href="{% static 'favicon.ico'%}">
+  
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -36,27 +38,33 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="{% url 'main:stats' %}">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+            <span class="nav-link-text">Stats</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="{% url 'main:allOperations' %}">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
+            <span class="nav-link-text">All Operations</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main:categories' %}">
+            <i class="fa fa-fw fa-list-ul"></i>
+            <span class="nav-link-text">Categories</span>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item nav-spec nav-expense" data-toggle="tooltip" data-placement="right" title="Add new Expense">
-          <a class="nav-link text-center" href="{% url 'main:AddExpense' %}">
+          <a class="nav-link text-center" href="{% url 'main:addExpense' %}">
             <i class="fa fa-fw fa-minus"></i>
             <span class="nav-link-text">Expense</span>
           </a>
         </li>
         <li class="nav-item nav-spec nav-income" data-toggle="tooltip" data-placement="right" title="Add new Income">
-          <a class="nav-link text-center" href="{% url 'main:AddIncome' %}">
+          <a class="nav-link text-center" href="{% url 'main:addIncome' %}">
             <i class="fa fa-fw fa-plus"></i>
             <span class="nav-link-text">Income</span>
           </a>
@@ -174,7 +182,6 @@
       </div>
     </div>
     
-    {% load static %}
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
@@ -182,6 +189,7 @@
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin.js'%}"></script>
+    {% block custom-scripts %}{% endblock %}
   </div>
 </body>
 

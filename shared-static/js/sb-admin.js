@@ -27,4 +27,27 @@
     }, 1000, 'easeInOutExpo');
     event.preventDefault();
   });
+
+  $(document).ready(function() {
+    $('#expTable, #incTable').dataTable({
+      "ordering": false,
+      "searching": false
+    });
+  });
+
+  
+  
 })(jQuery); // End of use strict
+
+//enabling form input
+function makeEditable(id){
+  "use strict";
+  $( document ).ready(function(event) {
+    $('#edit-cat-'+id).prop('disabled', false);
+    $('#edit-amount-'+id).prop('disabled', false);
+    $('#btn-enable-form-'+id).removeAttr('onclick');
+    $('#btn-enable-form-'+id).prop('id', 'btn-save-form-'+id);
+    $('#btn-save-form-'+id).html('Save');
+    $('#btn-save-form-'+id).prop('type', 'submit');
+  });
+}
