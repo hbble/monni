@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 
 <head>
@@ -7,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Monni - Money Management Service</title>
+  <title>{% trans 'Monni - Money Management Service' %}</title>
   
   {% load static %}
   <!-- Bootstrap core CSS-->
@@ -31,59 +32,52 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="mainAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example">
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'main:index' %}">
             <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
+            <span class="nav-link-text">{% trans 'Dashboard' %}</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'main:stats' %}">
             <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Stats</span>
+            <span class="nav-link-text">{% trans 'Stats' %}</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'main:allOperations' %}">
             <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">All Operations</span>
+            <span class="nav-link-text">{% trans 'All Operations' %}</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'main:categories' %}">
             <i class="fa fa-fw fa-list-ul"></i>
-            <span class="nav-link-text">Categories</span>
+            <span class="nav-link-text">{% trans 'Categories' %}</span>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item nav-spec nav-expense" data-toggle="tooltip" data-placement="right" title="Add new Expense">
+        <li class="nav-item nav-spec nav-expense" data-toggle="tooltip" data-placement="right" title="{% trans 'Add new Expense' %}">
           <a class="nav-link text-center" href="{% url 'main:addExpense' %}">
             <i class="fa fa-fw fa-minus"></i>
-            <span class="nav-link-text">Expense</span>
+            <span class="nav-link-text">{% trans 'Expense' %}</span>
           </a>
         </li>
-        <li class="nav-item nav-spec nav-income" data-toggle="tooltip" data-placement="right" title="Add new Income">
+        <li class="nav-item nav-spec nav-income" data-toggle="tooltip" data-placement="right" title="{% trans 'Add new Income' %}">
           <a class="nav-link text-center" href="{% url 'main:addIncome' %}">
             <i class="fa fa-fw fa-plus"></i>
-            <span class="nav-link-text">Income</span>
+            <span class="nav-link-text">{% trans 'Income' %}</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">
             <i class="fa fa-question"></i>
-            <span class="nav-link-text">Support Us</span>
+            <span class="nav-link-text">{% trans 'Support Us' %}</span>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          {% if user.is_authenticated %}
-          <a class="nav-link" href="#">{{ user.username }} Logged In</a>
-          {% else %}
-            <a class="nav-link" href="#">Logged Out</a>
-          {% endif %}
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-bell"></i>
@@ -128,20 +122,11 @@
           </div>
         </li>
         <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </li>
+            <p class="nav-link mb-0">{% trans 'Hello,' %} {{ user.username }}!</p>
+          </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#logoutModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            <i class="fa fa-fw fa-sign-out"></i>{% trans 'Logout' %}</a>
         </li>
       </ul>
     </div>
@@ -155,7 +140,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Monni 2018</small>
+          <small>Copyright © Monni 2018. By <a href="https://github.com/hbble/" target="blank">Hubble</a></small>
         </div>
       </div>
     </footer>
@@ -168,21 +153,22 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="logoutModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="logoutModalLabel">{% trans 'Ready to Leave?' %}</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">{% trans 'Select "Logout" below if you are ready to end your current session.' %}</div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="{% url 'auth:logout' %}">Logout</a>
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">{% trans 'Cancel' %}</button>
+            <a class="btn btn-primary" href="{% url 'auth:logout' %}">{% trans 'Logout' %}</a>
           </div>
         </div>
       </div>
     </div>
     
     <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
     <!-- Core plugin JavaScript-->

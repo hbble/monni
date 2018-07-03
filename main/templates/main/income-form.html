@@ -1,19 +1,19 @@
 {% extends "main/base.html" %}
-
+{% load i18n %}
 {% block container %}
   <!-- Breadcrumbs-->
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="/">Dashboard</a>
+      <a href="/">{% trans 'Dashboard' %}</a>
     </li>
-    <li class="breadcrumb-item active">Income Form</li>
+    <li class="breadcrumb-item active">{% trans 'Income Form' %}</li>
   </ol>
 
   <div class="row">
     <div class="col-12">
       <!-- {# Card new #} -->
       <div class="card bg-light border border-success mb-3">
-        <div class="card-header">Add new Income:</div>
+        <div class="card-header">{% trans 'Add new Income:' %}</div>
         <div class="card-body ">
           {% if error_message %}
           <div class="alert alert-danger" role="alert">
@@ -25,26 +25,26 @@
             <div class="form-group mb-1">
               <div class="form-row align-items-end">
                 <div class="col-md-7">
-                  <label for="inCategorySelect">Category</label>
+                  <label for="inCategorySelect">{% trans 'Category' %}</label>
                   <select class="form-control" id="inCategorySelect" name="category" required>
-                    <option disabled selected style="display:none">Select Category</option>
+                    <option disabled selected style="display:none">{% trans 'Select Category' %}</option>
                     {% for category in cat_list %}
                       <option value="{{ category.id }}">{{ category.name }}</option>
                     {% endfor %}
                   </select>
                 </div>
                 <div class="col-md-3">
-                  <label for="inputAmount" >Amount</label>
+                  <label for="inputAmount" >{% trans 'Amount' %}</label>
                   <div class="input-group ">
                     <input class="form-control input-amount" id="inputAmount"
-                      name="amount" type="number" min="0" required placeholder="Enter amount">
+                      name="amount" type="number" min="0" required placeholder="{% trans 'Enter amount' %}">
                     <div class="input-group-append">
                         <div class="input-group-text">₴</div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-2">
-                    <input class="btn btn-dark btn-block" type="submit" value="Submit">
+                    <input class="btn btn-dark btn-block" type="submit" value="{% trans 'Submit' %}">
                 </div>
               </div>
             </div>
@@ -53,9 +53,14 @@
       </div>
       <!-- {# Card latest #} -->
       <div class="card bg-light mb-3">
-        <div class="card-header">Latest Incomes:</div>
+        <div class="card-header">{% trans 'Latest Incomes:' %}</div>
         <div class="card-body">
-          {% if latest_inc_list %}
+            {% if error_editing_message %}
+            <div class="alert alert-danger" role="alert">
+              {{ error_editing_message }}
+            </div>
+            {% endif %}
+            {% if latest_inc_list %}
             {% for income in latest_inc_list %}
               <!-- {# Form cycle #} -->
               <form action="{% url 'main:editIncome' income.id %}" method="post">
@@ -73,7 +78,7 @@
                     <div class="col-md-3">
                       <div class="input-group input-group-sm">
                         <input class="form-control input-amount" id="edit-amount-{{ income.id }}" name="amount" disabled type="number"
-                          min="0" value="{{ income.amount }}" required placeholder="Enter amount">
+                          min="0" value="{{ income.amount }}" required placeholder="{% trans 'Enter amount' %}">
                         <div class="input-group-append">
                           <div class="input-group-text">₴</div>
                         </div>
@@ -81,17 +86,17 @@
                     </div>
                     <div class="col-md-2">
                       <div class="btn-group btn-group-sm d-flex" role="group" aria-label="Edit Group">
-                        <button class="btn btn-dark w-75" type="button" id="btn-enable-form-{{ income.id }}" onclick="makeEditable('{{ income.id }}')">Edit</button>
-                        <button class="btn btn-danger w-25" type="button" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-dark w-75" type="button" id="btn-enable-form-{{ income.id }}" onclick="makeEditable('{{ income.id }}')">{% trans 'Edit' %}</button>
+                        <button class="btn btn-danger w-25" type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ income.id }}"><i class="fa fa-trash"></i></button>
                       </div>
                     </div>
                   </div>
                 </div>
               </form>
             {% endfor %}
-            <a class="btn btn-secondary btn-block" href="{% url 'main:allOperations' %}" role"button">More..</a>
+            <a class="btn btn-secondary btn-block" href="{% url 'main:allOperations' %}" role"button">{% trans 'More..' %}</a>
           {% else %}
-              There is no latest incomes yet. You can add one using form above.
+            {% trans 'There is no latest incomes yet. You can add one using form above.' %}
           {% endif %}
         </div>
       </div>
@@ -103,15 +108,18 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Confirm</h5>
+          <h5 class="modal-title" id="deleteModalLabel">{% trans 'Confirm' %}</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Delete" below if you really want to delete selected item.</div>
+        <div class="modal-body">{% trans 'Select "Delete" below if you really want to delete selected item.' %}</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="#">Delete</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">{% trans 'Cancel' %}</button>
+          <form id="del-form" data-action="{% url 'main:deleteIncome' 0 %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">{% trans 'Delete' %}</button>
+          </form>
         </div>
       </div>
     </div>

@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-14 16:57+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: .\shared-static\js\sb-admin.js:41
+msgid "Save"
+msgstr "Зберегти"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11241
+msgid ": activate to sort column ascending"
+msgstr ": виберіть для сортування в порядку зростання"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11264
+msgid ": activate to sort column descending"
+msgstr ": виберіть для сортування в порядку спадання"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11294
+msgid "First"
+msgstr "Перша"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11317
+msgid "Last"
+msgstr "Остання"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11340
+msgid "Next"
+msgstr "Наступна"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11363
+msgid "Previous"
+msgstr "Попередня"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11386
+msgid "No data available in table"
+msgstr "Відсутні дані для відображення в таблиці"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11418
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Показано від _START_ до _END_ з _TOTAL_ записів"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11439
+msgid "Показано від 0 до 0 з 0 записів"
+msgstr ""
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11579
+msgid "Show _MENU_ entries"
+msgstr "Показувати _MENU_ записів"
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11603
+msgid "Loading..."
+msgstr "Завантаження..."
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11624
+msgid "Processing..."
+msgstr "Застосування..."
+
+#: .\shared-static\vendor\datatables\jquery.dataTables.js:11659
+msgid "Search:"
+msgstr "Пошук:"

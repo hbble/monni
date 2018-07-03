@@ -1,5 +1,5 @@
 {% extends "main/base.html" %}
-
+{% load i18n %}
 {% block custom-head-links %}
 {% load static %}
 <!-- Page level plugin CSS-->
@@ -7,123 +7,24 @@
 {% endblock %}
 
 {% block container %}
-  <!-- Breadcrumbs-->
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Dashboard</li>
-  </ol>
-  <!-- Area Chart Example-->
-  <div class="card mb-3">
-    <div class="card-header">
-      <i class="fa fa-area-chart"></i> Area Chart</div>
-    <div class="card-body">
-      <canvas id="topAreaChart" width="100%" height="30"></canvas>
-    </div>
-    <div class="card-footer small text-muted">Footer</div>
-  </div>
-  <div class="row">
-    <div class="col-lg-8">
-      <!-- Example Bar Chart Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-bar-chart"></i> Bar Chart</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-8 my-auto">
-              <canvas id="myBarChart" width="100" height="50"></canvas>
-            </div>
-            <div class="col-sm-4 text-center my-auto">
-              <div class="h4 mb-0 text-primary">$34,693</div>
-              <div class="small text-muted">YTD Revenue</div>
-              <hr>
-              <div class="h4 mb-0 text-warning">$18,474</div>
-              <div class="small text-muted">YTD Expenses</div>
-              <hr>
-              <div class="h4 mb-0 text-success">$16,219</div>
-              <div class="small text-muted">YTD Margin</div>
-            </div>
-          </div>
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item active">{% trans 'Dashboard' %}</li>
+    </ol>
+    <!-- Area Chart-->
+    {% include 'main/stats/line-chart.html' %}
+    <div class="row">
+        <!-- Bar Chart Card-->
+        <div class="col-lg-8">
+            {% include 'main/stats/bar-chart.html' %}
         </div>
-        <div class="card-footer small text-muted">Footer</div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <!-- Example Pie Chart Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-pie-chart"></i> Pie Chart</div>
-        <div class="card-body">
-          <canvas id="catPieChart" width="100%" height="100"></canvas>
+        <!-- Pie Chart Card-->
+        <div class="col-lg-4">
+            {% include 'main/stats/pie-chart.html' %}
         </div>
-        <div class="card-footer small text-muted">Footer</div>
-      </div>
     </div>
-  </div>
-  <!-- Example DataTables Card-->
-  <div class="card mb-3">
-    <div class="card-header">
-      <i class="fa fa-table"></i> Data Table</div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            <tr>
-              <td>Jonas Alexander</td>
-              <td>Developer</td>
-              <td>San Francisco</td>
-              <td>30</td>
-              <td>2010/07/14</td>
-              <td>$86,500</td>
-            </tr>
-            <tr>
-              <td>Shad Decker</td>
-              <td>Regional Director</td>
-              <td>Edinburgh</td>
-              <td>51</td>
-              <td>2008/11/13</td>
-              <td>$183,000</td>
-            </tr>
-            <tr>
-              <td>Michael Bruce</td>
-              <td>Javascript Developer</td>
-              <td>Singapore</td>
-              <td>29</td>
-              <td>2011/06/27</td>
-              <td>$183,000</td>
-            </tr>
-            <tr>
-              <td>Donna Snider</td>
-              <td>Customer Support</td>
-              <td>New York</td>
-              <td>27</td>
-              <td>2011/01/25</td>
-              <td>$112,000</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-  </div>
+    <!-- DataTables Card-->
+    {% include 'main/stats/table-all.html' %}
 {% endblock %}
 
 {% block custom-scripts %}
@@ -132,6 +33,6 @@
 <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
 <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
 <!-- Custom scripts for this page-->
-<script src="{% static 'js/sb-admin-datatables.min.js' %}"></script>
+<script src="{% static 'js/sb-admin-datatables.js' %}"></script>
 <script src="{% static 'js/sb-admin-charts.js' %}"></script>
 {% endblock %}

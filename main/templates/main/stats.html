@@ -1,5 +1,5 @@
 {% extends "main/base.html" %}
-
+{% load i18n %}
 {% block custom-head-links %}
 {% load static %}
 <!-- Page level plugin CSS-->
@@ -7,57 +7,26 @@
 {% endblock %}
 
 {% block container %}
-  <!-- Breadcrumbs-->
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Stats</li>
-  </ol>
-  <!-- Area Chart Example-->
-  <div class="card mb-3">
-    <div class="card-header">
-      <i class="fa fa-area-chart"></i> Last Activity Chart</div>
-    <div class="card-body">
-      <canvas id="topAreaChart" width="100%" height="30"></canvas>
-    </div>
-    <div class="card-footer small text-muted">Footer</div>
-  </div>
-  <div class="row">
-    <div class="col-lg-8">
-      <!-- Example Bar Chart Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-bar-chart"></i> Bar Chart Example</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-8 my-auto">
-              <canvas id="myBarChart" width="100" height="50"></canvas>
-            </div>
-            <div class="col-sm-4 text-center my-auto">
-              <div class="h4 mb-0 text-primary">$34,693</div>
-              <div class="small text-muted">YTD Revenue</div>
-              <hr>
-              <div class="h4 mb-0 text-warning">$18,474</div>
-              <div class="small text-muted">YTD Expenses</div>
-              <hr>
-              <div class="h4 mb-0 text-success">$16,219</div>
-              <div class="small text-muted">YTD Margin</div>
-            </div>
-          </div>
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="/">{% trans 'Dashboard' %}</a>
+    </li>
+    <li class="breadcrumb-item active">{% trans 'Stats' %}</li>
+    </ol>
+    <!-- Area Chart-->
+    <!-- Area Chart-->
+    {% include 'main/stats/line-chart.html' %}
+    <div class="row">
+        <!-- Bar Chart Card-->
+        <div class="col-lg-8">
+            {% include 'main/stats/bar-chart.html' %}
         </div>
-        <div class="card-footer small text-muted">Footer</div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <!-- Example Pie Chart Card-->
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-pie-chart"></i> Category Chart</div>
-        <div class="card-body">
-          <canvas id="catPieChart" width="100%" height="100"></canvas>
+        <!-- Pie Chart Card-->
+        <div class="col-lg-4">
+            {% include 'main/stats/pie-chart.html' %}
         </div>
-        <div class="card-footer small text-muted">Chart shows expenses category pie.</div>
-      </div>
     </div>
-  </div>
 {% endblock %}
 
 {% block custom-scripts %}

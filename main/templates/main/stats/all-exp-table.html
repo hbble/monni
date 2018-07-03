@@ -1,0 +1,42 @@
+{% load i18n %}
+<div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> {% trans 'Latest Expenses Table' %}</div>
+        <div class="card-body pl-0 pr-0">
+            <div class="table-responsive">
+            {% if latest_exp_list %}
+                <table class="table table-bordered table-striped" id="expTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>{% trans 'Category' %}</th>
+                    <th>{% trans 'Amount' %}</th>
+                    <th>{% trans 'Date' %}</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                    <th>ID</th>
+                    <th>{% trans 'Category' %}</th>
+                    <th>{% trans 'Amount' %}</th>
+                    <th>{% trans 'Date' %}</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for exp in latest_exp_list%}
+                    <tr>
+                        <td>{{exp.id}}</td>
+                        <td>{{exp.category}}</td>
+                        <td class="amount-cell bg-danger text-light">-{{exp.amount}}₴</td>
+                        <td>{{exp.date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            {% else %}
+                <p class="pl-3">{% trans 'There is no latest expenses yet.' %}</p>
+            {% endif %}
+            </div>
+        </div>
+        <div class="card-footer small text-muted">{% trans 'Footer' %}</div>
+    </div>

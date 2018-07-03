@@ -1,8 +1,15 @@
 from django.contrib import admin
 from .models import InCategory, OutCategory, Income, Expense
+from modeltranslation.admin import TranslationAdmin
 
-admin.site.register(InCategory)
-admin.site.register(OutCategory)
+class InCategoryAdmin(TranslationAdmin):
+    pass
+
+class OutCategoryAdmin(TranslationAdmin):
+    pass
+
+admin.site.register(InCategory, InCategoryAdmin)
+admin.site.register(OutCategory, OutCategoryAdmin)
 
 #temp
 admin.site.register(Income)
