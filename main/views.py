@@ -1,4 +1,3 @@
-from datetime import timedelta
 from itertools import chain
 from operator import attrgetter
 from django.shortcuts import get_object_or_404, get_list_or_404
@@ -15,6 +14,7 @@ from .stat import StatsData
 
 @login_required
 def index(request):
+    '''Index view.'''
     inc_list = Income.objects.filter(
         user=request.user
         ).order_by('-date')
@@ -23,7 +23,7 @@ def index(request):
         user=request.user
         ).order_by('-date')
 
-    #error empty list
+    #error empty list / need fix
     if not inc_list or not exp_list:
         return render(request, 'main/index.html', {'error_empty': _('Nothing to show here.')})
 
@@ -39,16 +39,18 @@ def index(request):
 
 @login_required
 def cat_view(request):
+    '''Category showing/editing view.'''
     return render(request, 'main/categories.html')
 
 @login_required
 def add_income_view(request):
+    '''New income view.'''
     cat_list = get_list_or_404(InCategory)
     latest_inc_list = Income.objects.filter(
         date__lte=timezone.now(),
         user=request.user
         ).order_by('-date')[:3]
-    
+
     context = {
         'latest_inc_list': latest_inc_list,
         'cat_list': cat_list,
@@ -57,6 +59,7 @@ def add_income_view(request):
 
 @login_required
 def add_expense_view(request):
+    '''New expense view.'''
     cat_list = get_list_or_404(OutCategory)
     latest_exp_list = Expense.objects.filter(
         date__lte=timezone.now(),
@@ -70,6 +73,7 @@ def add_expense_view(request):
     return render(request, 'main/expense-form.html', context)
 
 def post_income(request):
+    '''Submit new income view.'''
     try:
         user = request.user
         category = InCategory.objects.get(pk=request.POST['category'])
@@ -88,6 +92,7 @@ def post_income(request):
         return HttpResponseRedirect(reverse('main:addIncome'))
 
 def post_expense(request):
+    '''Submit new expense view.'''
     try:
         user = request.user
         category = OutCategory.objects.get(pk=request.POST['category'])
@@ -107,9 +112,10 @@ def post_expense(request):
 
 
 def edit_expense(request, edit_id):
+    '''Edit expense view.'''
     try:
         expense = get_object_or_404(Expense, pk=edit_id)
-        
+
         expense.category = OutCategory.objects.get(pk=request.POST['category'])
         expense.amount = request.POST.get('amount')
         expense.save()
@@ -123,6 +129,7 @@ def edit_expense(request, edit_id):
         return HttpResponseRedirect(reverse('main:addExpense'))
 
 def edit_income(request, edit_id):
+    '''Edit income view.'''
     try:
         income = get_object_or_404(Income, pk=edit_id)
         
@@ -139,6 +146,7 @@ def edit_income(request, edit_id):
         return HttpResponseRedirect(reverse('main:addIncome'))
 
 def delete_expense(request, edit_id):
+    '''Delete expense view.'''
     try:
         expense = get_object_or_404(Expense, pk=edit_id)
         expense.delete()
@@ -152,6 +160,7 @@ def delete_expense(request, edit_id):
         return HttpResponseRedirect(reverse('main:addExpense'))
 
 def delete_income(request, edit_id):
+    '''Delete income view.'''
     try:
         income = get_object_or_404(Income, pk=edit_id)
         income.delete()
@@ -166,6 +175,7 @@ def delete_income(request, edit_id):
 
 @login_required
 def all_operations_view(request):
+    '''All operations table.'''
     #try-except needed
     latest_exp_list = Expense.objects.filter(
         user=request.user
@@ -183,6 +193,7 @@ def all_operations_view(request):
 
 @login_required
 def stats_view(request):
+    '''Stats view.'''
     list_e = Expense.objects.filter(user=request.user)
     list_i = Income.objects.filter(user=request.user)
 
@@ -194,8 +205,8 @@ def stats_view(request):
 
 @login_required
 def get_data(request):
-    '''Getting data for Charts'''
-    provider = StatsData()
+    '''Getting data for Charts (Json)'''
+    provider = StatsData() #stat.py
 
     data = {
         "pie_chart": provider.pie_exp_data(request),

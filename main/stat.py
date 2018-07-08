@@ -1,15 +1,15 @@
-import functools
-from datetime import timedelta, date
+from datetime import timedelta
 from django.db.models import Sum
-from .models import InCategory, OutCategory, Income, Expense
 from django.utils import formats
 from dateutil.relativedelta import relativedelta
+from .models import InCategory, OutCategory, Income, Expense
 
 
 class StatsData:
     '''Class calculates and provides data for charts'''
 
-    def pie_exp_data(self, request):
+    @staticmethod
+    def pie_exp_data(request):
         '''Data for PieChart'''
         pie_data = {}
         categories = [c.name for c in OutCategory.objects.all()]
@@ -29,8 +29,8 @@ class StatsData:
         }
         return pie_data
 
-    #merge for exp and inc
-    def line_data(self, request):
+    @staticmethod
+    def line_data(request):
         '''Data for LineChart expenses'''
         line_data = {}
 
@@ -47,9 +47,9 @@ class StatsData:
             ])
 
         dates = [min_d + timedelta(days=x) for x in range((max_d-min_d).days + 1)]
-        labels = [formats.date_format(d,"M d") for d in dates]
-        
-        def amount_e_day_sum(date_param):
+        labels = [formats.date_format(d, "M d") for d in dates]
+
+        def daily_e_amount_sum(date_param):
             '''Daily expense amount sum'''
             value = Expense.objects.filter(
                 user=request.user,
@@ -57,12 +57,12 @@ class StatsData:
                 date__month=date_param.month,
                 date__day=date_param.day,
                 ).aggregate(Sum('amount')).get('amount__sum')
-                
+
             if value is None:
                 return 0
             return value
 
-        def amount_i_day_sum(date_param):
+        def daily_i_amount_sum(date_param):
             '''Daily income amount sum'''
             value = Income.objects.filter(
                 user=request.user,
@@ -70,13 +70,13 @@ class StatsData:
                 date__month=date_param.month,
                 date__day=date_param.day,
                 ).aggregate(Sum('amount')).get('amount__sum')
-            
+
             if value is None:
                 return 0
             return value
 
-        values_e = list(map(amount_e_day_sum, dates))
-        values_i = list(map(amount_i_day_sum, dates))
+        values_e = list(map(daily_e_amount_sum, dates))
+        values_i = list(map(daily_i_amount_sum, dates))
 
         line_data = {
             "labels": labels,
@@ -87,7 +87,8 @@ class StatsData:
 
         return line_data
 
-    def bar_data(self, request):
+    @staticmethod
+    def bar_data(request):
         '''Datasets for BarChart'''
         labels = []
         list_e = Expense.objects.filter(user=request.user,).order_by('date')
@@ -131,8 +132,6 @@ class StatsData:
                 "data": data,
             })
 
-        
-
         bar_data = {
             "datasets": datasets,
             "labels": labels,
@@ -145,8 +144,7 @@ class StatsData:
     #     date__lte=timezone.now(),
     #     date__gte=timezone.now() - timedelta(days=30),
     #     ).order_by('date')
-    
+
     # inc_data = Income.objects.filter(
     #     user=request.user
     #     ).order_by('date')
-
