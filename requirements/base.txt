@@ -1,5 +1,4 @@
 Django==2.0.1
 django-modeltranslation==0.13b1
-mod-wsgi==4.5.24
 psycopg2==2.7.4
 python-dateutil==2.6.1
