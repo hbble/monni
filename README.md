@@ -18,7 +18,7 @@ Money management web-service.
 
 7. Setup database. I'm using [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). You need to create new database and user (granted with permissions to edit) and set listed permissions to database in `config.py` file.
 
-    If you want to use other than PostgreSQL database you also need you change `ENGINE` value in `settings.py`.
+    If you want to use other than PostgreSQL database you also need to change `ENGINE` value in `settings.py`.
     
 8. `cd` to project directory (`manage.py` have to be in there) then install project models into database:
     ```
