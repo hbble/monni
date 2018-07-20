@@ -12,19 +12,29 @@ Money management web-service.
     ```
     pip install -r requirements/base.txt
     ```
+5. Rename file [_config.py](monni/_config.py) to `config.py`.
 
-5. Setup database. I'm using [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). You need to set permissions to database in `settings.py` line `[84]`.
+6. [Generate](https://www.miniwebtool.com/django-secret-key-generator/) and paste `SECRET_KEY` to your `config.py` file.
+
+7. Setup database. I'm using [PostgreSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads). You need to create new database and user (granted with permissions to edit) and set listed permissions to database in `config.py` file.
 
     If you want to use other than PostgreSQL database you also need you change `ENGINE` value in `settings.py`.
     
-6. `cd` to project directory (`manage.py` have to be in there) then install project models into database:
+8. `cd` to project directory (`manage.py` have to be in there) then install project models into database:
     ```
     python manage.py makemigrations main
     python manage.py migrate
     ```
-7. To start project run:
+
+9. Create project superuser:
+    ```
+    python manage.py createsuperuser
+    ```
+    Now you can start project:
     ```
     python manage.py runserver
     ```
 
-8. Visit `http://127.0.0.1:8000`
+10. Visit `http://127.0.0.1:8000/admin` and and login using created user. Add some Expense and Income categories so project can work properly.
+
+
