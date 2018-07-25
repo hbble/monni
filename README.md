@@ -12,7 +12,7 @@ Money management web-service.
     ```
     pip install -r requirements/base.txt
     ```
-5. Project have localisation feature. So if you want to use it, you need to install `gettext`*.
+5. Project have localization feature. So if you want to use it, you need to install [gettext](https://www.gnu.org/software/gettext/)*.
 
     *Tested on `gettext 0.19.8.1 + iconv 1.15`, Windows 10 x64.
     
