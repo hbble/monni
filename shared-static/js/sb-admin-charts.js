@@ -83,7 +83,8 @@ function charts(data){
             },
             legend: {
             display: true
-            }
+            },
+            spanGaps: true,
         }
     });
 

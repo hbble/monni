@@ -58,8 +58,6 @@ class StatsData:
                 date__day=date_param.day,
                 ).aggregate(Sum('amount')).get('amount__sum')
 
-            if value is None:
-                return 0
             return value
 
         def daily_i_amount_sum(date_param):
@@ -71,8 +69,6 @@ class StatsData:
                 date__day=date_param.day,
                 ).aggregate(Sum('amount')).get('amount__sum')
 
-            if value is None:
-                return 0
             return value
 
         values_e = list(map(daily_e_amount_sum, dates))
@@ -82,7 +78,7 @@ class StatsData:
             "labels": labels,
             "values_e": values_e,
             "values_i": values_i,
-            "max": max(values_e + values_i),
+            "max": max(x for x in values_e + values_i if x is not None),
         }
 
         return line_data
