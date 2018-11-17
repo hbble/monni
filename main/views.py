@@ -23,9 +23,12 @@ def index(request):
         user=request.user
         ).order_by('-date')
 
-    #error empty list / need fix
-    if not inc_list or not exp_list:
-        return render(request, 'main/index.html', {'error_empty': _('Nothing to show here.')})
+    error_inc_empty = None
+    error_exp_empty = None
+    if not inc_list:
+        error_inc_empty = _('Income list is empty.')
+    if not exp_list:
+        error_exp_empty = _('Expence list is empty.')
 
     table_row_list = sorted(
         chain(inc_list, exp_list),
@@ -34,6 +37,8 @@ def index(request):
 
     context = {
         'table_row_list': table_row_list,
+        'error_inc_empty': error_inc_empty,
+        'error_exp_empty': error_exp_empty,
     }
     return render(request, 'main/index.html', context)
 
@@ -110,7 +115,6 @@ def post_expense(request):
     else:
         return HttpResponseRedirect(reverse('main:addExpense'))
 
-
 def edit_expense(request, edit_id):
     '''Edit expense view.'''
     try:
@@ -185,9 +189,15 @@ def all_operations_view(request):
         user=request.user
         ).order_by('-date')
 
+    table_row_list = sorted(
+        chain(latest_inc_list, latest_exp_list),
+        key=attrgetter('date'),
+        reverse=True)
+
     context = {
         'latest_exp_list': latest_exp_list,
         'latest_inc_list': latest_inc_list,
+        'table_row_list':table_row_list,
     }
     return render(request, 'main/all-operations.html', context)
 
@@ -197,11 +207,19 @@ def stats_view(request):
     list_e = Expense.objects.filter(user=request.user)
     list_i = Income.objects.filter(user=request.user)
 
-    #error empty list
-    if not list_e or not list_i:
-        return render(request, 'main/stats.html', {'error_empty': 'Nothing to show here.'})
+    error_inc_empty = None
+    error_exp_empty = None
+    if not list_i:
+        error_inc_empty = _('Income list is empty.')
+    if not list_e:
+        error_exp_empty = _('Expence list is empty.')
 
-    return render(request, 'main/stats.html')
+    context = {
+        'error_inc_empty': error_inc_empty,
+        'error_exp_empty': error_exp_empty,
+    }
+
+    return render(request, 'main/stats.html', context)
 
 @login_required
 def get_data(request):

@@ -3,7 +3,7 @@
     <div class="card-header">
         <i class="fa fa-bar-chart"></i> {% trans 'Bar Chart' %}</div>
     <div class="card-body">
-        {% if not error_empty %}
+        {% if not error_exp_empty %}
             <div class="row">
             <div class="col-sm my-auto">
             <canvas id="myBarChart" width="100" height="50"></canvas>
@@ -11,7 +11,7 @@
             
             </div>
         {% else %}
-            <p>{{error_empty}}</p>
+            <p>{{error_exp_empty}}</p>
         {% endif %}
     </div>
     <div class="card-footer small text-muted">{% trans 'Showing monthly expense info by categories' %}</div>

@@ -3,10 +3,10 @@
     <div class="card-header" data-endpoint="{% url 'main:statsData' %}">
         <i class="fa fa-area-chart"></i> {% trans 'Area Chart' %}</div>
     <div class="card-body">
-        {% if not error_empty %}
+        {% if not error_exp_empty or not error_inc_empty %}
             <canvas id="topAreaChart" width="100%" height="30"></canvas>
         {% else %}
-            <p>{{error_empty}}</p>
+            <p>{% trans 'Not enough data to show in this chart.' %}</p>
         {% endif %}
     </div>
     <div class="card-footer small text-muted">{% trans 'Showing daily expense and income info' %}</div>

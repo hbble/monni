@@ -15,13 +15,9 @@
     <li class="breadcrumb-item active">{% trans 'All Operations' %}</li>
     </ol>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col">
             <!-- DataTables Card-->
-            {% include 'main/stats/all-exp-table.html' %}
-        </div>
-        <div class="col-lg-6">
-            <!-- DataTables Card-->
-            {% include 'main/stats/all-inc-table.html' %}
+            {% include 'main/stats/table-all.html' %}
         </div>
     </div>
 {% endblock %}

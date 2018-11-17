@@ -8,9 +8,12 @@ from .models import InCategory, OutCategory, Income, Expense
 class StatsData:
     '''Class calculates and provides data for charts'''
 
-    @staticmethod
-    def pie_exp_data(request):
+    def pie_exp_data(self, request):
         '''Data for PieChart'''
+        list_e = Expense.objects.filter(user=request.user)
+        if not list_e:
+            return None
+        
         pie_data = {}
         categories = [c.name for c in OutCategory.objects.all()]
 
@@ -29,22 +32,30 @@ class StatsData:
         }
         return pie_data
 
-    @staticmethod
-    def line_data(request):
+    def line_data(self, request):
         '''Data for LineChart expenses'''
         line_data = {}
 
-        list_e = Expense.objects.filter(user=request.user,).order_by('date')
-        list_i = Income.objects.filter(user=request.user,).order_by('date')
+        list_e = Expense.objects.filter(user=request.user).order_by('date')
+        list_i = Income.objects.filter(user=request.user).order_by('date')
+        if not list_e and not list_i:
+            return None
 
-        min_d = min([
-            list_e[0].date.date(),
-            list_i[0].date.date()
-            ]) # .date() - converts datetime to date
-        max_d = max([
-            list_e.reverse()[0].date.date(),
-            list_i.reverse()[0].date.date()
-            ])
+        if not list_e:
+            min_d = min([list_i[0].date.date()]) # .date() - converts datetime to date
+            max_d = max([list_i.reverse()[0].date.date()])
+        elif not list_i:
+            min_d = min([list_e[0].date.date()])
+            max_d = max([list_e.reverse()[0].date.date()])
+        else:
+            min_d = min([
+                list_e[0].date.date(),
+                list_i[0].date.date()
+                ])
+            max_d = max([
+                list_e.reverse()[0].date.date(),
+                list_i.reverse()[0].date.date()
+                ])
 
         dates = [min_d + timedelta(days=x) for x in range((max_d-min_d).days + 1)]
         labels = [formats.date_format(d, "M d") for d in dates]
@@ -83,11 +94,13 @@ class StatsData:
 
         return line_data
 
-    @staticmethod
-    def bar_data(request):
+    def bar_data(self, request):
         '''Datasets for BarChart'''
+
         labels = []
         list_e = Expense.objects.filter(user=request.user,).order_by('date')
+        if not list_e:
+            return None
 
         min_d = list_e[0].date.date()
         max_d = list_e.reverse()[0].date.date()
@@ -134,13 +147,3 @@ class StatsData:
             "max": max(all_data),
         }
         return bar_data
-
-    # exp_data = Expense.objects.filter(
-    #     user=request.user,
-    #     date__lte=timezone.now(),
-    #     date__gte=timezone.now() - timedelta(days=30),
-    #     ).order_by('date')
-
-    # inc_data = Income.objects.filter(
-    #     user=request.user
-    #     ).order_by('date')
